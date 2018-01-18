@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Blog} from './blog.model';
-import {BlogService} from '../blog.service';
+import {Component, OnInit, Output} from '@angular/core';
+import {Response} from '@angular/http';
+import {ServerService} from '../server-service';
 
 @Component({
   selector: 'app-blog',
@@ -8,17 +8,21 @@ import {BlogService} from '../blog.service';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit{
-  blogs: Blog[];
+  blogs: any[];
 
 
-  constructor(private blogService: BlogService) {}
+  constructor(private serverService: ServerService) {}
 
   ngOnInit() {
-this.blogs = this.blogService.getBlogs();
+this.serverService.getAllPosts().subscribe(
+  (response: Response) => {
+    const data = response.json();
+    this.blogs = data;
+     console.log(data);
   }
-  openBlog() {
+);
+  }
 
-  }
 
 
 }

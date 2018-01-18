@@ -1,25 +1,28 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
+import {Response} from '@angular/http';
 
 import {Blog} from './blog/blog.model';
+import {ServerService} from './server-service';
 
 @Injectable()
-export class BlogService {
+export class BlogService implements OnInit{
 
-  private blogs: Blog[] = [
-    new Blog('post1', 'content1'),
-    new Blog('Ankit Bio Data', 'smarty'),
-    new Blog('post4', 'content4'),
-    new Blog('post5', 'content5'),
-    new Blog('post6', 'content6'),
-    new Blog('post7', 'content7'),
-    new Blog('post8', 'content8'),
-    new Blog('post9', 'content9'),
-    new Blog('post10', 'content10'),
-    new Blog('post11', 'content11')
-  ];
+  constructor(private serverService: ServerService){
+  }
+  private blogs: Blog[];
 
+  ngOnInit() {
+// this.blogs = this.blogService.getBlogs();
+    this.serverService.getAllPosts().subscribe(
+      (response: Response) => {
+        const data = response.json();
+        this.blogs = data;
+        console.log(data);
+      }
+    );
+  }
   getBlogs() {
-return this.blogs.slice();
+return this.blogs;
   }
 
   getBlog(index: number) {

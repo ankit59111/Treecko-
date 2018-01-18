@@ -8,7 +8,7 @@ import {BlogService} from "../../blog.service";
   styleUrls: ['./blog-item.component.css']
 })
 export class BlogItemComponent implements OnInit {
-@Input() blog: Blog;
+@Input() blog: any;
 @Input() index: number;
   constructor(private blogService: BlogService) { }
 

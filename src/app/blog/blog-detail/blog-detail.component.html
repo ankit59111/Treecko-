@@ -1,24 +1,36 @@
 <div class="container">
-  <div class="row">
     <div class="col-md-7">
-      <h2>{{ blog.title }}</h2>
-      <hr>
-      <p style="font-size: 20px">{{ blog.content }}</p>
+      <div class="panel panel-default">
+        <div class="panel-heading">{{ blog.title }}
+          <p style="float: right" > {{ blog.date }}</p>
+        </div>
+        <div class="panel-body" >Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+          but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages,
+          and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+      </div>
+
     </div>
-  </div>
 </div>
-<hr>
 <div class="container">
-  <div class="row"  *ngFor="let comm of comments">
-    <p style="font-family: Calibri">{{ comm.text }}</p>
+  <label>comments:</label>
+  <div *ngFor="let comm of comments">
+  <div class="panel panel-default">
+    <div class="panel-heading" style="font-size: x-small">By: XYZ
+    </div>
+    <div class="panel-body" >{{ comm.body }}</div>
+  </div>
+  </div>
+  <div >
+    <p style="font-family: Calibri">{{ comm.body }}</p>
   </div>
 </div>
 <div class="container-fluid">
   <div class="row">
     <form (ngSubmit) = "onSubmit()" #f="ngForm">
       <div class="form-group">
-        <label>Comments: </label>
-
         <textarea class="glyphicon-comment form-control"
                   rows="3"
         ngModel
