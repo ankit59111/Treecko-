@@ -53,11 +53,12 @@ export class BlogDetailComponent implements OnInit {
         body: this.textareaVlue,
         postId: this.id
       }).subscribe(
-        (response) => {console.log('succesfully posted');
+        (response) => {
+          this.getComments();
+          console.log('succesfully posted');
         }
       );
     }
-    setTimeout(this.getComments(), 5000);
     this.coment.reset();
   }
 

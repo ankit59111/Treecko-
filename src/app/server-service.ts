@@ -8,12 +8,6 @@ export class ServerService {
   allComments: any[];
 constructor(private http: Http) {
 }
-  postComment(comment: any) {
-    this.http.post(`http://assignment-server.herokuapp.com/comments`, comment).subscribe(
-      (response) => {console.log('succesfully posted');
-      }
-    );
-  }
 setFilterString(value: string) {
   this.filterString = value;
 }
