@@ -1,6 +1,4 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {Blog} from '../blog.model';
-import {BlogService} from "../../blog.service";
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-blog-item',
@@ -10,7 +8,7 @@ import {BlogService} from "../../blog.service";
 export class BlogItemComponent implements OnInit {
 @Input() blog: any;
 @Input() index: number;
-  constructor(private blogService: BlogService) { }
+  constructor() { }
 
   ngOnInit() {
   }

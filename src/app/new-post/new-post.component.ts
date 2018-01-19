@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
+import {Router} from '@angular/router';
 
 import {ServerService} from '../server-service';
 
@@ -10,19 +11,23 @@ import {ServerService} from '../server-service';
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit {
-d = new Date().toDateString.toString().slice(4);
+  d = new Date().toDateString().toString().slice(4);
   @ViewChild('f') signInForm: NgForm;
   newPost = {
     author: '',
     title: '',
     date: this.d
   };
-  constructor(private serverService: ServerService) { }
+  constructor(private serverService: ServerService, private router: Router) { }
 
   onSubmit() {
-    this.newPost.author = this.signInForm.value.userName;
-    this.newPost.title = this.signInForm.value.userName;
+    this.newPost.author = this.signInForm.value.author;
+    this.newPost.title = this.signInForm.value.title;
     this.serverService.newPost(this.newPost);
+    console.log(this.newPost);
+    console.log(this.newPost.date);
+    this.signInForm.reset();
+    this.router.navigate(['/'], { replaceUrl: true });
   }
 
 

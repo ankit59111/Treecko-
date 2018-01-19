@@ -9,8 +9,6 @@ import {ActivatedRoute, Params} from '@angular/router';
 export class AppComponent implements OnInit{
 
 
-  title = 'grgregregre';
-  private idName = '';
 
   constructor(private route: ActivatedRoute) {
 console.log(route);
