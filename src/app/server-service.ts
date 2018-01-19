@@ -8,7 +8,12 @@ export class ServerService {
   allComments: any[];
 constructor(private http: Http) {
 }
-
+  postComment(comment: any) {
+    this.http.post(`http://assignment-server.herokuapp.com/comments`, comment).subscribe(
+      (response) => {console.log('succesfully posted');
+      }
+    );
+  }
 setFilterString(value: string) {
   this.filterString = value;
 }
@@ -39,14 +44,9 @@ getPost(index: number) {
 }
  setComments(post: any) {
   this.allComments = post.comments;
-  console.log(this.allComments);
   return this.allComments;
 }
 newPost(post: any) {
   this.http.post(`http://assignment-server.herokuapp.com/posts`, post).subscribe();
-}
-
-postComment(comment: any) {
-  this.http.post(`http://assignment-server.herokuapp.com/comments`, comment).subscribe();
 }
 }

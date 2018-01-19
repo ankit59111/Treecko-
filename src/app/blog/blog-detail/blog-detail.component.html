@@ -1,8 +1,8 @@
 <div class="container">
     <div class="col-md-7">
       <div class="panel panel-default">
-        <div class="panel-heading">{{ blog.title }}
-          <p style="float: right" > {{ blog.date }}</p>
+        <div class="panel-heading">{{ title }}
+          <p style="float: right" > {{ postdate }}</p>
         </div>
         <div class="panel-body" >Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -16,11 +16,11 @@
 </div>
 <div class="container">
   <label>comments:</label>
-  <div *ngFor="let comm of comments">
+  <div *ngFor="let comment of comments">
   <div class="panel panel-default">
     <div class="panel-heading" style="font-size: x-small">By: XYZ
     </div>
-    <div class="panel-body" >{{ comm.body }}</div>
+    <div class="panel-body" >{{ comment.body }}</div>
   </div>
   </div>
 </div>

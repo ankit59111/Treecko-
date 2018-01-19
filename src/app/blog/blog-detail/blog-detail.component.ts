@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Response} from '@angular/http';
+import {Http, Response} from '@angular/http';
 
 
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -15,14 +15,16 @@ import {ServerService} from '../../server-service';
   styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
-  d = new Date().toDateString().toString().slice(4);
   @ViewChild('f') coment: NgForm;
+  title: 'xvy';
+  postdate: 'juh';
+  d = new Date().toDateString().toString().slice(4);
   comments: any[];
   textareaVlue: string;
-  blog: any;
   id: number;
+
   constructor(private serverService: ServerService,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private http: Http) {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'] + 1;
@@ -31,29 +33,40 @@ export class BlogDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.serverService.getPost(this.id).subscribe(
+    this.serverService.getPost(this.id).subscribe(
       (response: Response) => {
         const individualPost = response.json();
-        this.blog = individualPost;
+        this.title = individualPost.title;
+        this.postdate = individualPost.date;
         this.comments = this.serverService.setComments(individualPost);
+      },
+      (error) => {
+        console.log(error.message);
       }
     );
   }
 
-onSubmit() {
+  onSubmit() {
     this.textareaVlue = this.coment.value.fullComments;
     if (this.coment.value.fullComments != null) {
-      this.serverService.postComment({
+      this.http.post(`http://assignment-server.herokuapp.com/comments`, {
         body: this.textareaVlue,
         postId: this.id
+      }).subscribe(
+        (response) => {console.log('succesfully posted');
+        }
+      );
+    }
+    setTimeout(this.getComments(), 5000);
+    this.coment.reset();
+  }
+
+  getComments() {
+    this.serverService.getPost(this.id).subscribe(
+      (response: Response) => {
+        const individualPost = response.json();
+        this.comments = this.serverService.setComments(individualPost);
+        console.log(this.comments);
       });
-    }
-  this.serverService.getPost(this.id).subscribe(
-    (response: Response) => {
-      const individualPost = response.json();
-      this.comments = this.serverService.setComments(individualPost);
-    }
-  );
-  this.coment.reset();
-}
+  }
 }
