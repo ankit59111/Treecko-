@@ -55,6 +55,5 @@ onSubmit() {
     }
   );
   this.coment.reset();
-  this.router.navigate([/posts/])
 }
 }
