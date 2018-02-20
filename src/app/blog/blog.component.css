@@ -1,0 +1,9 @@
+.container{
+  display: inline-block;
+}
+
+app-blog-item{
+  width: 15%;
+  display: inline-block;
+  margin-right: 5px;
+}

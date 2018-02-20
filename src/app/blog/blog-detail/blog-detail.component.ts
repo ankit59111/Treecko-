@@ -8,6 +8,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 
 
 import {ServerService} from '../../server-service';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-blog-detail',
@@ -24,7 +25,7 @@ export class BlogDetailComponent implements OnInit {
   id: number;
 
   constructor(private serverService: ServerService,
-              private route: ActivatedRoute, private http: Http) {
+              private route: ActivatedRoute, private http: Http, private loaderservice: Ng4LoadingSpinnerService) {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'] + 1;
@@ -33,8 +34,11 @@ export class BlogDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loaderservice.show();
     this.serverService.getPost(this.id).subscribe(
       (response: Response) => {
+        // console.log(this.loaderservice.getMessage());
+        this.loaderservice.hide();
         const individualPost = response.json();
         this.title = individualPost.title;
         this.postdate = individualPost.date;

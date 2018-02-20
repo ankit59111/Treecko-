@@ -17,25 +17,28 @@
 <div class="container">
   <label>comments:</label>
   <div *ngFor="let comment of comments">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="width: 60%; overflow-y: auto; overflow-x: hidden">
     <div class="panel-heading" style="font-size: x-small">By: XYZ
     </div>
-    <div class="panel-body" >{{ comment.body }}</div>
+    <div class="panel-body" style="max-height: 80px">{{ comment.body }}</div>
   </div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
+    <div class="col-xs-6">
     <form (ngSubmit) = "onSubmit()" #f="ngForm">
       <div class="form-group">
         <textarea class="glyphicon-comment form-control"
                   rows="3"
-        ngModel
-        name="fullComments"
-        ></textarea>
+                  ngModel
+                 name="fullComments"
+        placeholder="comment here.............">
+        </textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
   </div>
+</div>
 </div>

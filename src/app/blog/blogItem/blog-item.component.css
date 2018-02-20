@@ -1,0 +1,13 @@
+*{
+  width: 100%;
+  height: auto;
+}
+.panel{
+  padding: 3px;
+  display: inline-grid;
+}
+
+.panel-heading{
+
+  padding-top: 4px;
+}
